@@ -10,7 +10,7 @@
         place-items: center;
         }
         #demo{
-            width: 800px;
+            width: 1000px;
 			font-family: Calibri;
             place-items: center;  
 			font-size: 20px;
@@ -55,7 +55,8 @@
             clear: both;
             display: table;
             }
-        table, th,td{
+        table,th,td{
+            width: 350px;
             border: solid 1px #000;         
             border-collapse: collapse;
             padding: 2px 3px;
@@ -63,6 +64,7 @@
 			margin: 20px auto;
             text-align: left;
         }
+
     </style>
 </head>
 <body>
@@ -103,7 +105,7 @@ var form = document.createElement("form");
 			submitBtn.setAttribute("type","button");
 			submitBtn.setAttribute("id","submit");
 			submitBtn.setAttribute("value","Submit");
-			submitBtn.setAttribute("onclick","saveToFile()");
+			submitBtn.setAttribute("onclick","createTable()");
 
 			form.appendChild(submitBtn);
             form.appendChild(addBtn);
@@ -157,7 +159,7 @@ function convertToJSON() {
             sMarks[x]["Average :"]=avg1+"%";
   document.getElementById('output').value = JSON.stringify(sMarks);
 }
-function saveToFile() {
+function createTable() {
     convertToJSON();
     var jsonKey = [];
 		jsonKey = Object.keys(sMarks["Student"]); 
