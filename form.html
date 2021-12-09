@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Dynamic form</title>
+	<style>
+        #f1{  
+				width: 350px;
+				font-family: Calibri;  
+				font-size: 20px;
+				text-align: left;
+				overflow: hidden;  
+				margin: auto;  
+				margin: 20px auto;  
+				padding: 80px;  
+				background: #ddd;  
+				border-radius: 15px    
+			}
+        label { 
+				color: #000000; 
+				font-weight: bold; 
+				display: block; 
+				width: 135px; 
+				float: left; 
+				}
+        #add{
+				padding : 5px;
+				float:right;
+                margin: auto;  
+				margin: 20px auto;
+				} 
+		#submit{
+				padding : 5px;
+				float:right;
+                margin: auto;  
+				margin: 20px auto;
+				}
+    </style>
+</head>
+<body>
+	<h1> Student Mark adding Form <h1>
+	<input type='button' onclick='createForm()' value='Create a Student Details form' /> <br><br>
+    <p id="stdForm"></p>
+	<p id="output"></p>
+</body>
+<script>
+function createForm(){
+var form = document.createElement("form");
+			form.setAttribute("id","f1");
+			form.setAttribute("method","post");
+			form.setAttribute("action","");
+			
+			var label0 = document.createElement("label");
+			label0.innerHTML="Student name :";
+            label0.setAttribute("id", "label0");
+			window.inpt0 = document.createElement("input");
+			inpt0.setAttribute("type", "text");
+			inpt0.setAttribute("id","inpt0");
+			
+			var label1 = document.createElement("label");
+			label1.innerHTML="Class :";
+            label1.setAttribute("id", "label1");
+			window.inpt1 = document.createElement("input");
+			inpt1.setAttribute("type", "text");
+			inpt1.setAttribute("id","inpt1");
+			
+			var label2 = document.createElement("label");
+			label2.innerHTML="Roll No :";
+            label2.setAttribute("id", "label2");
+			window.inpt2 = document.createElement("input");
+			inpt2.setAttribute("type", "text");
+			inpt2.setAttribute("id","inpt2");
+			
+			var label3 = document.createElement("label");
+			label3.innerHTML="Mark 1 :";
+            label3.setAttribute("id", "label3");
+			window.inpt3 = document.createElement("input");
+			inpt3.setAttribute("type", "text");
+			inpt3.setAttribute("id","inpt3");
+
+			var br = document.createElement("br");
+					form.appendChild(label0);
+					form.appendChild(inpt0);
+					form.appendChild(br);
+					
+					form.appendChild(label1);
+					form.appendChild(inpt1);
+					form.appendChild(br);
+					
+					form.appendChild(label2);
+					form.appendChild(inpt2);
+					form.appendChild(br);
+					
+					form.appendChild(label3);
+					form.appendChild(inpt3);
+					form.appendChild(br);
+					
+			var addBtn = document.createElement("input");
+			addBtn.setAttribute("type","button");
+			addBtn.setAttribute("id","add");
+			addBtn.setAttribute("value","Add");
+			addBtn.setAttribute("onclick","createElmnt()");
+
+            var submitBtn = document.createElement("input");
+			submitBtn.setAttribute("type","button");
+			submitBtn.setAttribute("id","submit");
+			submitBtn.setAttribute("value","Submit");
+			submitBtn.setAttribute("onclick","saveToFile()");
+
+			form.appendChild(submitBtn);
+            form.appendChild(addBtn);
+			document.getElementById("stdForm").appendChild(form);
+		}
+let mCount=2;
+let inCount=4;
+function createElmnt(){
+var form = document.getElementById("f1");
+        var label = document.createElement("label");
+			label.innerHTML="Mark "+mCount+" :";
+            label.setAttribute("id", "label"+inCount);
+			window.inpt = document.createElement("input");
+			inpt.setAttribute("type", "text");
+			inpt.setAttribute("id","inpt"+inCount);
+            var br = document.createElement("br");
+            form.appendChild(label);
+		    form.appendChild(inpt);
+            form.appendChild(br);
+
+var addBtn1 = document.getElementById("add");
+var submitBtn1 = document.getElementById("submit");
+
+            form.appendChild(submitBtn1);
+            form.appendChild(addBtn1);
+            mCount++;
+            inCount++;
+}
+const sMarks={};
+function convertToJSON() {
+			var x="Student";
+			sMarks[x] = {};
+            for (i=0;i<inCount;i++){
+                var a =document.getElementById("label"+i).innerHTML;
+			sMarks[x][a] = document.getElementById("inpt"+i).value;
+            }
+  document.getElementById('output').value = JSON.stringify(sMarks);
+}
+function saveToFile() {
+  convertToJSON();
+  var jsonObjectAsString = document.getElementById('output').value;
+
+  var blob = new Blob([jsonObjectAsString], {
+    type: 'octet/stream'
+  });
+  console.log(blob);
+
+  var anchor = document.createElement('a')
+  anchor.download = "sMarks.json";
+  anchor.href = window.URL.createObjectURL(blob);
+  anchor.innerHTML = "download"
+  anchor.click();
+
+  console.log(anchor);
+
+  document.getElementById('output').append(anchor)
+
+
+}
+</script>
+</html>
