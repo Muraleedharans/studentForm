@@ -159,6 +159,8 @@ function convertToJSON() {
             sMarks[x]["Average :"]=avg1+"%";
   document.getElementById('output').value = JSON.stringify(sMarks);
 }
+var funcCount=0;
+var jsontable = document.getElementById('jsonTable');
 function createTable() {
     convertToJSON();
     var jsonKey = [];
@@ -175,9 +177,14 @@ function createTable() {
                     var tabRow = tr.insertCell(-1);
                     tabRow.innerHTML = sMarks["Student"][jsonKey[i]];
 				}
-            var form = document.getElementById("f1");
-            var jsontable = document.getElementById('jsonTable');
+           if (funcCount>0){
+            jsontable.innerhtml = "";
+            jsontable.textContent = "";
+            
+        }
 			jsontable.appendChild(table);
+            funcCount++;
+
 }
 </script>
 </html>
